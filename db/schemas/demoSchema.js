@@ -5,7 +5,7 @@ const demoSchema = mongoose.Schema(
     name: {
       type: String,
     },
-    image: {
+    email: {
       type: String,
       unique: true,
       required: true,
