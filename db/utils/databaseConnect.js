@@ -1,10 +1,7 @@
-// external import
 const mongoose = require('mongoose');
 
-// database uri
 const uri = `mongodb+srv://${process.env.DB_AUTHOR}:${process.env.DB_PASSWORD}@cluster0.heseoqb.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
-// connecting to the database
 const databaseConnect = () => {
   mongoose
     .connect(uri, {
@@ -19,5 +16,4 @@ const databaseConnect = () => {
     });
 };
 
-// exporting module
 module.exports = databaseConnect;
