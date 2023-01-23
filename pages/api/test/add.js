@@ -1,3 +1,4 @@
+//  internal imports
 import Demo from '@/db/models/Demo';
 import databaseConnect from '@/db/utils/databaseConnect';
 
@@ -6,7 +7,7 @@ export default async function addTestHandler(req, res) {
     await databaseConnect();
     console.log('adding info to database');
     const demoData = await new Demo({ ...req.body }).save();
-    console.log('data added to the database!!');
+    // console.log('data added to the database!!');
     res.status(200).json({ data: demoData });
   } catch (error) {
     res.status(500).json({

@@ -1,3 +1,4 @@
+//  external import
 const mongoose = require('mongoose');
 
 const uri = `mongodb+srv://${process.env.DB_AUTHOR}:${process.env.DB_PASSWORD}@cluster0.heseoqb.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;

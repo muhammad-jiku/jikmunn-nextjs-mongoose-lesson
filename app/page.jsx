@@ -1,11 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
-import styles from '../src/styles/page.module.css';
-import { useEffect, useState } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
   const [demoTestData, setDemoTestData] = useState([]);
