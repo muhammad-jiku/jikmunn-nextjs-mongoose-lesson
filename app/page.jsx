@@ -4,7 +4,23 @@ import styles from '../src/styles/page.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+const getTestData = async () => {
+  const res = await fetch('/api/test');
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+};
+
+export default async function Home() {
+  const data = await getTestData();
+
   const addTest = async () => {
     const randomNum = Math.floor(Math.random() * 1000);
 
@@ -27,8 +43,12 @@ export default function Home() {
   return (
     <div>
       <button onClick={addTest}> Create Demo Data </button>
-      <h2></h2>
-      <p></p>
+      {data.map((d, idx) => (
+        <div key={idx}>
+          <h2>{d?.name} </h2>
+          <p> {d?.email} </p>
+        </div>
+      ))}
     </div>
   );
 }
