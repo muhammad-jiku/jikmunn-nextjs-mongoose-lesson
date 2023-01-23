@@ -9,6 +9,7 @@ export default function Home() {
     const randomNum = Math.floor(Math.random() * 1000);
 
     const res = await fetch('/api/test/add', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -22,5 +23,5 @@ export default function Home() {
     console.log(data);
     return data;
   };
-  return <h1> Hello there, welcome to demo of mongoose and nextjs</h1>;
+  return <button onClick={addTest}> Create Demo Data </button>;
 }
