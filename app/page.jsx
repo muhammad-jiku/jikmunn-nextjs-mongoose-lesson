@@ -23,5 +23,12 @@ export default function Home() {
     console.log(data);
     return data;
   };
-  return <button onClick={addTest}> Create Demo Data </button>;
+
+  return (
+    <div>
+      <button onClick={addTest}> Create Demo Data </button>
+      <h2></h2>
+      <p></p>
+    </div>
+  );
 }
