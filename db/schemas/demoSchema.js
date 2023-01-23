@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const demoSchema = mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
     },
     image: {
