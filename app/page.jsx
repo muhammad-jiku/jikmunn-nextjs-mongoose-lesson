@@ -1,25 +1,31 @@
+'use client';
+
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '../src/styles/page.module.css';
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const getTestData = async () => {
-  const res = await fetch('/api/test');
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+export default function Home() {
+  const [demoTestData, setDemoTestData] = useState([]);
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
+  useEffect(() => {
+    return () => {
+      const getTestData = async () => {
+        const res = await fetch('http://localhost:3000/api/test/', {
+          method: 'GET',
+        });
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
 
-  return res.json();
-};
-
-export default async function Home() {
-  const data = await getTestData();
+        const testData = await res.json();
+        setDemoTestData(testData?.data);
+      };
+      getTestData();
+    };
+  }, [demoTestData]);
 
   const addTest = async () => {
     const randomNum = Math.floor(Math.random() * 1000);
@@ -36,15 +42,14 @@ export default async function Home() {
     });
 
     const data = await res.json();
-    console.log(data);
-    return data;
+    console.log('data that added...', data);
   };
 
   return (
     <div>
       <button onClick={addTest}> Create Demo Data </button>
-      {data.map((d, idx) => (
-        <div key={idx}>
+      {demoTestData?.map((d) => (
+        <div key={d?._id}>
           <h2>{d?.name} </h2>
           <p> {d?.email} </p>
         </div>
